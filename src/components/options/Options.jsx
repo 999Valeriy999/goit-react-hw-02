@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Button } from './FeedbackOptionsStyles';
+import { Button } from './OptionsStyles';
 
 const FeedbackOptions = ({ options, onButtonClick }) => {
   return (

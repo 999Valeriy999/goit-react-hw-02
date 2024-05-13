@@ -1,48 +1,68 @@
 
 import Description  from './components/description/description';
-import Options from './components/options/FeedbackOptions';
+import { useEffect, useState } from "react";
+import Options from './components/options/Options';
+import Feedback from "./components/Feedback/Feedback";
+import Notification from "./components/Notification/Notification";
 
+function App() {
 
+  const [values, setValues] = useState(() => {    
+    
+    const savedFeedback = JSON.parse(localStorage.getItem("feedback"))
 
-  class App extends Component {
-    state = {
+    if (savedFeedback !== null) {
+      return savedFeedback
+    }
+
+    return{
       good: 0,
       neutral: 0,
-      bad: 0,
-    };
-  handleButtonClick = option => {
-    this.setState({
-      [option]: this.state[option] + 1,
+      bad:0
+    }
+
+  });
+  
+  const onLeaveFeedback = (option) => {
+    setValues({
+      ...values,
+      [option]: values[option] + 1
     });
   };
 
-  countTotalFeedback = () => {
-    const { good, neutral, bad } = this.state;
-    return good + neutral + bad;
-  };
+  useEffect(() => {
+    localStorage.setItem("feedback", JSON.stringify(values))
+  }, [values])
+  
+  const { good, neutral, bad } = values;
+  const totalFeedback = bad + good + neutral;
+  const positiveFeedback = Math.round((good / totalFeedback) * 100) 
 
-  countPositiveFeedbackPercentage = () => {
-    const { good } = this.state;
-    const total = this.countTotalFeedback();
-    return total > 0 ? Math.round((good / total) * 100) : 0;
-  };
+  const resetFeedback = () => {
+    setValues({
+      good: 0,
+      neutral: 0,
+      bad:0
+    })
+  }
 
-  render(){
-    const { good, neutral, bad } = this.state;
-return (
-<>
+
+  
+ return <>
 
   < Description/>
-  <Options
- options={Object.keys(this.state)}
- onButtonClick={this.handleButtonClick}
-/> 
+  <Options feedback={onLeaveFeedback} totalFeedback={totalFeedback} reset={resetFeedback} ></Options>
+    <>{totalFeedback === 0 ? <Notification message={"No feedback yet"} /> : <Feedback values={values} totalFeedback={totalFeedback} positiveFeedback={positiveFeedback } />}</>
+  </>;
+ }
+  
 
           
           
-   </>
-    );
-  }}
+  
+
+    
+  
   
 
 

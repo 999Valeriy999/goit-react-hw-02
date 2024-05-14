@@ -39,7 +39,8 @@ function App() {
   const positiveFeedback = Math.round((good / totalFeedback) * 100)
 
   const resetFeedback = () => {
-    setValues(0)
+    setValues(0);
+    
     }
     
   

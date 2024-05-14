@@ -36,7 +36,7 @@ export default function Options({
           </button>
         </li>
         <li>
-          {totalFeedback !== 0 && (
+        {totalFeedback !== 0 && (
             <button
               type="button"
               className={css.optionsButton}

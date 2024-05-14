@@ -36,15 +36,13 @@ function App() {
   
   const { good, neutral, bad } = values;
   const totalFeedback = bad + good + neutral;
-  const positiveFeedback = Math.round((good / totalFeedback) * 100) 
+  const positiveFeedback = Math.round((good / totalFeedback) * 100)
 
   const resetFeedback = () => {
-    setValues({
-      good: 0,
-      neutral: 0,
-      bad:0
-    })
-  }
+    setValues(0)
+    }
+    
+  
 
 
   
@@ -53,6 +51,7 @@ function App() {
   < Description/>
   <Options feedback={onLeaveFeedback} totalFeedback={totalFeedback} reset={resetFeedback} ></Options>
     <>{totalFeedback === 0 ? <Notification message={"No feedback yet"} /> : <Feedback values={values} totalFeedback={totalFeedback} positiveFeedback={positiveFeedback } />}</>
+   
   </>;
  }
   

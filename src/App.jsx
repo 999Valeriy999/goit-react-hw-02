@@ -43,29 +43,17 @@ function App() {
     
     }
     
-  
-
-
-  
+   
  return <>
 
   < Description/>
-  <Options feedback={onLeaveFeedback} totalFeedback={totalFeedback} reset={resetFeedback} ></Options>
+  <Options feedback={onLeaveFeedback} totalFeedback={totalFeedback}  resetFeedback={resetFeedback} ></Options>
     <>{totalFeedback === 0 ? <Notification message={"No feedback yet"} /> : <Feedback values={values} totalFeedback={totalFeedback} positiveFeedback={positiveFeedback } />}</>
    
   </>;
- }
-  
-
-          
-          
-  
-
-    
+ }   
   
   
-
-
 export default App;
 
 
